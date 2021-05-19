@@ -25,15 +25,18 @@ app.get('/', (req, res) => {
   } else {
     let code = query.code;
     axios
-      .post('https://www.reddit.com/api/v1/access_token', {
-        Headers: {
-          Authorization: {
-            username: 'soX6EClIb3nDAQ',
-            password: '',
+      .post(
+        'https://www.reddit.com/api/v1/access_token',
+        `grant_type=authorization_code&code=${code}&redirect_uri=${redirectUri}`,
+        {
+          Headers: {
+            Authorization: {
+              username: 'soX6EClIb3nDAQ',
+              password: '',
+            },
           },
-        },
-        data: `grant_type=authorization_code&code=${code}&redirect_uri=${redirectUri}`,
-      })
+        }
+      )
       .then((response) => {
         console.log(response);
         res.end();
