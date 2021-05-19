@@ -27,13 +27,16 @@ app.get('/', (req, res) => {
     axios
       .post('https://www.reddit.com/api/v1/access_token', {
         Authorization: {
-          user: 'soX6EClIb3nDAQ',
+          username: 'soX6EClIb3nDAQ',
           password: '',
         },
         data: `grant_type=authorization_code&code=${code}&redirect_uri=${redirectUri}`,
       })
       .then((response) => {
         console.log(response);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }
 });
