@@ -9,12 +9,29 @@ const app = express();
 app.use(express.json());
 app.use(morgan('dev'));
 
+const users = {};
+
 let access_token = '';
 
 const redirectUri = 'http://52.14.170.19:3000';
 
+app.post('/users', (req, res) => {
+  const { username, password } = req.body;
+  users[username] = password;
+  res.send();
+});
+
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  if (users[username] && users[username] === password) {
+    res.send(200);
+  } else {
+    res.send(401);
+  }
+});
+
 app.get('/access', (req, res) => {
-  res.send(access_token);
+  res.send({ access_token });
 });
 
 app.get('/', (req, res) => {
