@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
         'https://www.reddit.com/api/v1/access_token',
         `grant_type=authorization_code&code=${code}&redirect_uri=${redirectUri}`,
         {
-          Authorization: {
+          auth: {
             username: 'soX6EClIb3nDAQ',
             password: '',
           },
