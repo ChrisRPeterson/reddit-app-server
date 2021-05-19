@@ -9,7 +9,13 @@ const app = express();
 app.use(express.json());
 app.use(morgan('dev'));
 
+let access_token = '';
+
 const redirectUri = 'http://52.14.170.19:3000';
+
+app.get('/access', (req, res) => {
+  res.send(access_token);
+});
 
 app.get('/', (req, res) => {
   const query = req.query;
@@ -37,6 +43,7 @@ app.get('/', (req, res) => {
       )
       .then((response) => {
         console.log(response);
+        access_token = response.data.access_token;
         res.end();
       })
       .catch((err) => {
