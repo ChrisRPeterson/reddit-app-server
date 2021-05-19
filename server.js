@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
     let code = query.code;
     axios
       .post('https://www.reddit.com/api/v1/access_token', {
-        Authorization: {
+        auth: {
           username: 'soX6EClIb3nDAQ',
           password: '',
         },
@@ -34,9 +34,11 @@ app.get('/', (req, res) => {
       })
       .then((response) => {
         console.log(response);
+        res.end();
       })
       .catch((err) => {
         console.error(err);
+        res.end();
       });
   }
 });
